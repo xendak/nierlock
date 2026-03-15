@@ -74,6 +74,7 @@ The visual glitches use GLSL fragment shaders.
 
 - [Shadertoy: MtXBDs](https://www.shadertoy.com/view/MtXBDs)
 - [Shadertoy: wf2SDV](https://www.shadertoy.com/view/wf2SDV)
+- [Shadertoy: 3ffBz2](https://www.shadertoy.com/view/3ffBz2)
 
 There might be a few more shadertoy links I used as reference, I don't remember.
 sorry.
