@@ -24,7 +24,7 @@
 
 ## Preview
 
-[![Watch the video](https://raw.githubusercontent.com/xendak/nierlock/main/thumbnail.png)](https://raw.githubusercontent.com/xendak/nierlock/main/video.mp4)
+[![Watch the video](https://raw.githubusercontent.com/xendak/nierlock/main/thumbnail.png)](https://raw.githubusercontent.com/xendak/nierlock/main/nier.mp4)
 
 ## Requirements
 
