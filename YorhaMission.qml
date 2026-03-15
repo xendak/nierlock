@@ -17,8 +17,7 @@ Item {
         return ((completed / todoList.length) * 100).toFixed(1) + "%";
     }
 
-
-    width:  450
+    width: 450
     height: hudColumn.implicitHeight
 
     // TODO extraction
@@ -47,13 +46,13 @@ Item {
 
     Column {
         id: hudColumn
-        width:   parent.width
+        width: parent.width
         spacing: 10
 
         Rectangle {
-            width:   parent.width * 0.7
-            height:  1
-            color:   Config.yorhaDark
+            width: parent.width * 0.7
+            height: 1
+            color: Config.yorhaDark
             opacity: 0.4
         }
 
@@ -61,85 +60,93 @@ Item {
             spacing: 2
 
             Text {
-                text:           "CURRENT LOCATION: " + root.currentLoc
-                color:          Config.yorhaDark
+                text: "CURRENT LOCATION: " + root.currentLoc
+                color: Config.yorhaDark
                 font.pixelSize: Config.fontSmall - 2
-                font.family:    Config.mainFont
-                opacity:        0.6
+                font.family: Config.mainFont
+                opacity: 0.6
             }
 
             Text {
-                text:           "MISSION STATUS: " + (root.todoList.length > 0 ? "ACTIVE" : "INACTIVE")
-                color:          Config.yorhaDark
+                text: "MISSION STATUS: " + (root.todoList.length > 0 ? "ACTIVE" : "INACTIVE")
+                color: Config.yorhaDark
                 font.pixelSize: Config.fontHeader
-                font.bold:      true
-                font.family:    Config.mainFont
+                font.bold: true
+                font.family: Config.mainFont
             }
         }
 
         // Objectives
         Column {
-            width:      parent.width
-            spacing:    8
+            width: parent.width
+            spacing: 8
             topPadding: 5
 
             Text {
-                text:           "Objective:"
-                color:          Config.yorhaDark
+                text: "Objective:"
+                color: Config.yorhaDark
                 font.pixelSize: Config.fontSmall - 2
-                font.family:    Config.mainFont
-                opacity:        0.6
-                visible:        root.todoList.length > 0
+                font.family: Config.mainFont
+                opacity: 0.6
+                visible: root.todoList.length > 0
             }
 
             Repeater {
                 model: root.todoList
 
                 Item {
-                    width:  hudColumn.width
+                    width: hudColumn.width
                     // height tracks the text height once it's measured
                     height: taskText.implicitHeight + 4
 
                     Rectangle {
-                        id:       diamond
-                        width:    10
-                        height:   10
+                        id: diamond
+                        width: 10
+                        height: 10
                         rotation: 45
-                        color:    modelData.done ? Config.todoDone : Config.todoPending
+                        color: modelData.done ? Config.todoDone : Config.todoPending
                         anchors.verticalCenter: parent.verticalCenter
 
                         SequentialAnimation on opacity {
                             running: taskHover.containsMouse
-                            loops:   Animation.Infinite
-                            NumberAnimation { from: 1;   to: 0.2; duration: 200 }
-                            NumberAnimation { from: 0.2; to: 1;   duration: 200 }
+                            loops: Animation.Infinite
+                            NumberAnimation {
+                                from: 1
+                                to: 0.2
+                                duration: 200
+                            }
+                            NumberAnimation {
+                                from: 0.2
+                                to: 1
+                                duration: 200
+                            }
                         }
                         onVisibleChanged: opacity = 1.0
                     }
 
                     YorhaText {
-                        id:             taskText
-                        anchors.left:   diamond.right
-                        anchors.leftMargin:     12
-                        anchors.right:          parent.right
+                        id: taskText
+                        anchors.left: diamond.right
+                        anchors.leftMargin: 12
+                        anchors.right: parent.right
                         anchors.verticalCenter: parent.verticalCenter
 
-                        text:         modelData.task
-                        fontSize:     Config.fontSmall
-                        showShadow:   false
+                        text: modelData.task
+                        fontSize: Config.fontSmall
+                        showShadow: false
 
-                        typeOnAppear:    true
-                        typeInterval:    50
-                        typeDelay:       index * 450
+                        typeOnAppear: true
+                        typeInterval: 50
+                        typeDelay: index * 450
 
-                        glitchEnabled:   true
-                        glitchRate:      3
-                        glitchMaxOfs:    4
+                        glitchEnabled: true
+                        glitchRate: 3
+                        glitchMaxOfs: 4
                         glitchSubChance: 0.25
                     }
 
                     MouseArea {
-                        id:           taskHover
+                        id: taskHover
                         anchors.fill: parent
                         hoverEnabled: true
                     }
@@ -147,54 +154,56 @@ Item {
             }
 
             Text {
-                text:           "NO CURRENT OBJECTIVES"
-                color:          Config.yorhaDark
+                text: "NO CURRENT OBJECTIVES"
+                color: Config.yorhaDark
                 font.pixelSize: Config.fontHeader - 4
-                font.family:    Config.mainFont
-                opacity:        0.4
-                visible:        root.todoList.length === 0
+                font.family: Config.mainFont
+                opacity: 0.4
+                visible: root.todoList.length === 0
             }
         }
 
         Column {
-            spacing:    2
+            spacing: 2
             topPadding: 15
-            width:      parent.width
+            width: parent.width
 
             Text {
-                text:           "SYSTEM SYNCHRONIZATION: OPERATIONAL"
-                color:          Config.yorhaDark
+                text: "SYSTEM SYNCHRONIZATION: OPERATIONAL"
+                color: Config.yorhaDark
                 font.pixelSize: Config.fontSmall - 4
-                font.family:    Config.mainFont
-                opacity:        0.4
+                font.family: Config.mainFont
+                opacity: 0.4
             }
 
             RowLayout {
-                width:   parent.width * 0.7
+                width: parent.width * 0.7
                 spacing: 0
 
                 Text {
-                    text:           "POD 042 / 153 SYNC: "
-                    color:          Config.yorhaDark
+                    text: "POD 042 / 153 SYNC: "
+                    color: Config.yorhaDark
                     font.pixelSize: Config.fontHeader - 4
-                    font.family:    Config.mainFont
+                    font.family: Config.mainFont
                 }
 
-                Item { Layout.fillWidth: true }
+                Item {
+                    Layout.fillWidth: true
+                }
 
                 Text {
-                    text:           root.syncValue
-                    color:          (parseFloat(root.syncValue) < 70.0) ? Config.yorhaRed : Config.yorhaGreen
+                    text: root.syncValue
+                    color: (parseFloat(root.syncValue) < 70.0) ? Config.yorhaRed : Config.yorhaGreen
                     font.pixelSize: Config.fontHeader - 4
-                    font.family:    Config.mainFont
-                    font.bold:      true
+                    font.family: Config.mainFont
+                    font.bold: true
                 }
             }
 
             Rectangle {
-                width:   parent.width * 0.7
-                height:  1
-                color:   Config.yorhaDark
+                width: parent.width * 0.7
+                height: 1
+                color: Config.yorhaDark
                 opacity: 0.3
             }
         }

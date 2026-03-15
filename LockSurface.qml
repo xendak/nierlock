@@ -12,9 +12,6 @@ Rectangle {
     property string userWhoAmI: "xendak"
     property bool accessGranted: false
 
-
-
-
     color: Config.yorhaBeige
 
     YorhaSounds {
@@ -103,8 +100,6 @@ Rectangle {
             }
         }
     }
-
-    
 
     // Username
     Process {
@@ -377,62 +372,68 @@ Rectangle {
         Item {
             id: accessGrantedBlock
             anchors.horizontalCenter: parent.horizontalCenter
-            anchors.bottom:           bottomBar.top
-            anchors.bottomMargin:     100
-            width:   accessText.implicitWidth
-            height:  accessText.implicitHeight + subLine.height + 8
+            anchors.bottom: bottomBar.top
+            anchors.bottomMargin: 100
+            width: accessText.implicitWidth
+            height: accessText.implicitHeight + subLine.height + 8
             visible: root.accessGranted
             opacity: 0.0
 
             Behavior on opacity {
-                NumberAnimation { duration: 300; easing.type: Easing.OutQuad }
+                NumberAnimation {
+                    duration: 300
+                    easing.type: Easing.OutQuad
+                }
             }
 
             // Fade in AND start typing when shown — NOT typeOnAppear
             onVisibleChanged: {
                 if (visible) {
-                    opacity = 1.0
-                    soundEngine.play("input")
-                    accessText.startTyping()
+                    opacity = 1.0;
+                    soundEngine.play("input");
+                    accessText.startTyping();
                 }
             }
 
             YorhaText {
-                id:   accessText
+                id: accessText
                 text: "ACCESS GRANTED"
                 bold: true
-                fontSize:   Config.fontLogin + 20
+                fontSize: Config.fontLogin + 20
                 showShadow: true
 
-                typeOnAppear:    false
-                typeInterval:    55
+                typeOnAppear: false
+                typeInterval: 55
 
-                glitchEnabled:   true
-                glitchRate:      2
-                glitchMaxOfs:    8
+                glitchEnabled: true
+                glitchRate: 2
+                glitchMaxOfs: 8
                 glitchSubChance: 0.35
 
                 typeSoundEnabled: true
-                typeSound:        "input"
-                typeSoundRate:    2
+                typeSound: "input"
+                typeSoundRate: 2
             }
 
             Rectangle {
                 id: subLine
-                anchors.top:              accessText.bottom
-                anchors.topMargin:        8
+                anchors.top: accessText.bottom
+                anchors.topMargin: 8
                 anchors.horizontalCenter: parent.horizontalCenter
-                height:  1
-                color:   Config.yorhaDark
+                height: 1
+                color: Config.yorhaDark
                 opacity: 0.5
-                width:   0
+                width: 0
                 Behavior on width {
-                    NumberAnimation { duration: 400; easing.type: Easing.OutCubic }
+                    NumberAnimation {
+                        duration: 400
+                        easing.type: Easing.OutCubic
+                    }
                 }
                 Connections {
                     target: accessText
                     function onTypingFinished() {
-                        subLine.width = accessText.implicitWidth
+                        subLine.width = accessText.implicitWidth;
                     }
                 }
             }
@@ -454,12 +455,11 @@ Rectangle {
 
         // Mission
         YorhaMission {
-            anchors.left:    parent.left
-            anchors.bottom:  bottomBar.top
+            anchors.left: parent.left
+            anchors.bottom: bottomBar.top
             anchors.margins: Config.marginLarge
-      }
+        }
 
-        
         YorhaAuthMenu {
             anchors.right: parent.right
             anchors.bottom: bottomBar.top

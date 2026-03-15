@@ -43,27 +43,41 @@ Item {
         return "SYSTEM STATE: NO ERROR";
     }
 
-
     // sysInfo
     Process {
         id: fetchSysInfo
         command: ["sh", "-c", "OS=$(grep 'PRETTY_NAME' /etc/os-release | cut -d'\"' -f2); HOST=$(uname -n); KERN=$(uname -r); UP=$(uptime -p | sed -s 's/up //g'); PKGS=$(nix-store --query --requisites /run/current-system | wc -l); echo \"$OS|$HOST|$KERN|$UP|$PKGS\""]
         running: false
-    
+
         stdout: StdioCollector {
             onStreamFinished: {
-                console.log("sysinfo fetcher")
+                console.log("sysinfo fetcher");
                 let parts = text.trim().split("|");
                 if (parts.length === 5) {
                     root.sysInfo = [
-                        { key: "OS",      val: parts[0] },
-                        { key: "HOST",    val: parts[1] },
-                        { key: "KERNEL",  val: parts[2] },
-                        { key: "UPTIME",  val: parts[3] },
-                        { key: "PACKAGES", val: parts[4] }
+                        {
+                            key: "OS",
+                            val: parts[0]
+                        },
+                        {
+                            key: "HOST",
+                            val: parts[1]
+                        },
+                        {
+                            key: "KERNEL",
+                            val: parts[2]
+                        },
+                        {
+                            key: "UPTIME",
+                            val: parts[3]
+                        },
+                        {
+                            key: "PACKAGES",
+                            val: parts[4]
+                        }
                     ];
                 }
-                fetchSysInfo.running = false
+                fetchSysInfo.running = false;
             }
         }
     }

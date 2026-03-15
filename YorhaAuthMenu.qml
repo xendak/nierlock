@@ -33,7 +33,7 @@ Item {
             fontFamily: Config.mainFont
             anchors.right: parent.right
         }
- 
+
         // Password input
         Rectangle {
             id: authBox
@@ -92,7 +92,7 @@ Item {
                 KeyNavigation.tab: btnPower
                 onTextChanged: {
                     root.context.currentText = text;
-                    soundEngine.play("input")
+                    soundEngine.play("input");
                 }
                 onAccepted: root.context.tryUnlock()
                 // NOTE: why i needed both?
